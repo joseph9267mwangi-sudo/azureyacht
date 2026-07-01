@@ -2,57 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width= , initial-scale=1.0">
-    <title>Luxury Yacht Rentals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocumentAzureYacht - Luxury Yacht Rentals</title>
+    <link href="https://fonts.googleapis.com/css2? family=Cormorant+Garamond:ital,wght@0,300;0,400;0,1,300;1&family=montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {margin: 0;background: #0a1628;color: white; font-family: Arial,sans-serif;}
-        .hero {background: linear-gradient(135deg,#0a1628,#0d3b6e);min-height: 60vh;display: flex;}
-        h1 {font-size: 52px;color: white;margin-bottom: 16px;}
-        .hero p {font-size: 16px;color: #aaa;max-width: 480px;}
-        booking {padding: 60px 40px;}
-        h2 {color: #c9a84c;font-size: 36px;margin-bottom: 30px; }
-        input, select, textarea {
-            display: block;width: 100%;padding: 12px;
-            margin-bottom: 16px;background: #ffffff10;
-            border: 1px solid #555;color: white;
-            font-size: 14px;box-sizing: border-box;
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --navy:#0a1628; --navy2: #0f1f2d; --gold: #c9a84c;
+            --gold2:#e8c96a; --cream: #f5f0e8; --white:#ffffff;
+            --muted: #8a9ab5; --border:rgba(201,168,76,0.25);
         }
-        select {background: #0d2040; }
-        button {
-            background: #c9a84c;color: #0a1628;
-            padding: 14px 40px;border: none;
-            font-size: 14px;font-weight: bold;cursor: pointer;
+        html{scroll-behavior: smooth;}
+        body{ background: var(--navy);color: var(--white); font-family: 'montserrat', sans-serif; font-weight: 300; line-height:  1.7;text-align: center;  }
+        nav { position:fixed; top: 0; left: 0; right: 0; z-index:  100; display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; background: linear-gradient(to bottom,rgba(10,22,40,0,0.95), transparent); }
+        .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 3px; color: var(--gold); text-transform: uppercase;text-align: center; }
+        .nav-links a{ color: var(--muted); text-decoration: none; font-size:  11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links{ display: flex; gap: 36px;}
+        .nav-links a:hover { color:  var(--gold); }
+        .hero {min-height: 100vh; background: linear-gradient(to bottom,rgba(10,22,40,0.3)60%, var(--navy) 100%), url('https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=160&q=80') center/cover no-repaet; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 24px 80px; }
+        .hero-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+        .hero h1 em { font-family: 'Cormorant Garamound', serif;font-size: clamp(52px, 8vw,96px); color: var(--gold); }
+        .hero-sub { font-size: 13px; letter-spacing: 1px; color: var(--muted); max-width: 480px; margin-bottom: 480px; }
+        .hero-cta {display: inline-block; padding: 16px 48px; border-top: 1px solid var(--gold);color: var(--gold); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: background 0.3s, color 0.3s ; }
+        .hero-cta:hover {background: var(--gold); color: var(--navy); }
+        .fleet-item {padding: 48px 40px; border-right: 1px solid var(--border);transition: all 0.3s ease; }
+        .fleet-item:last-child {border-left: none; }
+        .fleet-item:hover {background: rgba(201, 168, 76,0.04); cursor: pointer;transform: translateY(-4px); transition: all 0.3s ease;}
+        .fleet-name {font-family: 'Cormorant Garamond', serif;font-size: 24px; color: var(--gold); margin-bottom: 6px; }
+        .fleet-desc {font-size: 13px; color: #6a7f9a; line-height:1.8; }
+        .fleet-spec {font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;}
+        .booking-section {padding: 100px 24px; max-width: 760px;margin: 0 auto;text-align: center; }
+        .section-eyeblow {font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+        .section-title {font-family: 'Cormorant Garamond,serif'; font-size: clamp(36px,5vw,56px); font-weight: 300; line-height: 1.1; margin-bottom: 16px;}
+        .section-sub {font-size: 13px;color: var(--muted); margin-bottom: 56px; max-width: 480px; }
+        .form-grid {display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left;}
+        .section-sub {font-size: 13px; color: var(--muted); margin-bottom: 56px; max-width: 480px; margin-left: auto; margin-right: auto; text-align: center; }
+        .form-group {display: flex; flex-direction: column; gap: 8px;}
+        .form-group.full {grid-column: 1 / -1; }
+        .form-group label {font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold);text-align: center; }
+        .form-group input, .form-group select, .form-group textarea {background: rgba(255,255,255,0.04); border:  1px solid var(--border); color:var(--white); padding: 14px 18px; font-family: 'montserrat',sans-serif; font-size: 13px; font-weight: 300; outline: none; transition: border-color 0.3s; width: 100%; text-align: center; }
+        .form-group select option {background: var(--navy2);align-items: center; }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .gold-line { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 60px; }
+        .submit-btn { margin-top: 32px;width: 100%; padding: 18px;background: transparent; border: 1px solid var(--gold); color: var(--gold); font-family: 'montserrat',sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; color: 0.3s;text-align: center; }
+        .submit-btn:hover {background: var(--gold); color: var(--navy); }
+        footer {border-top: 1px solid var(--border); padding: 48px; display: flex; align-items: center; justify-content: space-between; }
+        .footer-logo {font-family: 'Cormorant Garamond',serif ; font-size: 18px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
+        .footer-copy {font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+        @media (maxwidth:768px){
+            nav {padding: 20px 24px;}
+            .nav-links {display: none;}
+            .fleet {grid-template-columns: 1fr; }
+            .fleet-item{ border-right: none; border-bottom: 1px solid var(--border); }
+            .form-grid { grid-template-columns: 1fr;}
+            footer {flex-direction: column; gap: 16px; text-align: center; }
+
         }
+    
     </style>
 </head>
 <body>
-
-<div class="booking" id="booking">
-    <h2>Book Your Yacht</h2>
-    <form method="POST" action="/">
+    <nav>
+        <div class="nav-logo">AzureYacht</div>
+        <div class="nav-links"></div>
+        <a href="#fleet">Fleet</a>
+        <a href="#booking">Reserve</a>
+        <a href="#">Contact</a>
+    </nav>
+    <section class="hero">
+        <p class="hero-eyebrow">Private Yacht Charters</p>
+        <h1>Sail Beyond<br><em>the Ordinary</em></h1>
+        <p class="hero-sub">Curated Luxury experience on open water.Three execeptional vessels. One unforgettable journey</p>
+        <a href="#booking" class="hero-octa">Reserve Your Charter</a>
+    </section>
+    <section>
+        <div class="fleet-item" id="fleet-item">
+            <div class="fleet-name">The Poseidon</div>
+            <div class="fleet-spec"> 65ft . up to 12 Guests</div>
+            <div class="fleet-desc">Classic elegance meets mordern comfort. Perfect for intimate gatherings and sunset cruises.</div>
+        </div>
+        <div class="fleet-item">
+            <div class="fleet-name">Azura Prestige</div>
+            <div class="fleet-spec">82ft . Up to 20 Guests</div>
+            <div class="fleet-desc">Our flagship vessel.Panoramic deck, full bar and a crew dedicated to flawless services</div>
+        </div>
+        <div class="fleet-item">
+            <div class="fleet-name">The Oceanus</div>
+            <div class="fleet-spec"> 110ft . up to 30 Guests</div>
+            <div class="fleet-desc">The Pinnacle of maritime luxury . For those who demand nothing less than extraordinary</div>
+        </div>
+    </section>
+    <section class="booking-section" id="booking"></section>
+    <span class="section-eyebrow">Charter Reservation</span>
+    <h2 class="section-title">Begin Your <br> Journey</h2>
+    <p class="section-sub">Complete your form below and our concierge team will confirm your booking within 24 Hours.</p>
+    <div class="gold-line"></div>
+    <form method="Post" action="/">
         {% csrf_token %}
-        <input type="text" name="first_name" placeholder="First Name" required>
-        <input type="text" name="last_name" placeholder="Last Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="phone" placeholder="phone" required>
-        <select name="yacht">
-            <option value="poseidon">The poseidon 65ft</option>
-            <option value="Azura">The Azura Prestige 82ft</option>
-            <option value="Oceanus">The Oceanus 110ft</option>
-        </select>
-        <input type="number" name="guests" placeholder="Number of Guests" required>
-        <input type="date" name="date" required>
-        <select name="duration">
-            <option value="4 Hours">4 hours</option>
-            <option value="6 Hours">6 Hours</option>
-            <option value="Full Day"></option>
-            <option value="Overnight"></option>                                        
-        </select>
-        <textarea name="message" placeholder="Special request" id=""></textarea>
-        <button type="submit">Book Now</button>
-    </form>
-</div>
+        <div class="form-grid">
+            <div class="form-group full">
+                <label for="First_Name">First Name</label>
+                <input type="text" name="first_name" id="first name" required>
+            </div>
+            <div class="form-group full">
+            <label for="last_name">last name</label>
+            <input type="text" name="last_name" id="last_name" required>
+        </div>
+        <br>
+        <div class="form-group full ">
+            <label for="phone">Phone Number</label>
+            <input type="tel" name="phone" id="phone" required>
+        </div>
+        <br>
+        <div class="form-group full">
+            <label for="email">Email Address></label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <br>
+        <div class="form-group full">
+            <select name="yacht" id="yacht">
+            <option value="poseidon">The Poseidon-65ft</option>
+            <option value="Azura Prestige">Azura Prestige-82ft</option>
+            <option value="The Oceanus">The Oceanus-110ft</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group full">
+            <label for="guests">Number Of Guests</label>
+            <input type="number" name="guests" id="guests" min="1" max="30" required>
+        </div>
+        <br>
+        <div class="form-group full">
+            <label for="date">Charter Date</label>
+            <input type="date" name="date" id="date" required>
+        </div>
+        <br>
+        <div class="form-group full">
+            <label for="duration">Duration</label>
+            <select name="duration" id="duration">
+                <option value="4 Hours">4 Hours</option>
+                <option value="6 Hours">6 Hours</option>
+                <option value="Full Day">Full Day</option>
+                <option value="Overnight">Overnight</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group full">
+            <label for="message">message</label>
+            <textarea name="message" id="message" placeholder="Catering preferences, occasions, special reqirements..."></textarea>
+        </div>
+        <br>
     
+        <button type="submit" class="submit-btn>Request Charter </button>
+                                                                                                                                                                                                                                                                                                             
+    </form>
+    </section>
+    <footer>
+        <div class="footer-logo">AzureYacht</div>
+        <div class="footer-copy">© 2026 AzureYacht. ALL rights Reserved</div>
+    </footer>
 </body>
-
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+</html>
