@@ -6,7 +6,7 @@ import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 
 def send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message,):
-    configuration = sib_api_v3_sdk.configuration()
+    configuration = sib_api_v3_sdk.Configuartion()
     configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
 
     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
@@ -29,7 +29,7 @@ def send_booking_email(first_name, last_name, email, phone, yacht, guests, date,
         text_content=email_content
     )
     api_instance.send_transac_email(send_smtp_email)
-    
+
 def home(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name','')
@@ -53,14 +53,9 @@ def home(request):
             duration=duration,
             message=message,
         )
-        send_mail(
-            subject=f'New Booking from {first_name} {last_name}',
-            message=f'Name:' + first_name + '' + last_name + '\nEmail: ' + email + '\nPhone: ' + phone + '\nYacht: ' + yacht + '\nGuests:' + guests + '\nDate' + date + '\nDuration:' + duration +'\nMessage: ' + message, 
-            from_email='joseph9267mwangi@gmail.com',
-            recipient_list=['joseph9267mwangi@gmail.com'],
-            fail_silently=False
-        )
+        send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message)
         return render(request, 'bookings/success.html')
+    
     return render(request, 'bookings/index.html')
 
 def success(request):
