@@ -6,7 +6,7 @@ import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 
 def send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message,):
-    configuration = sib_api_v3_sdk.Configuartion()
+    configuration = sib_api_v3_sdk.Configuration()
     configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
 
     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
