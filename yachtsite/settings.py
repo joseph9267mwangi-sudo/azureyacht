@@ -21,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-raroh)tt54zs5f(^+j5(5jcaeeku*+o)3o&lm*re-0=#m9@v&0'
+import os
+SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-8k#p2m$wz9@qr4x!e7htn6ubfj_a1cOv3sdyl5goi')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'false') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['azureyacht.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -121,6 +122,4 @@ EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER= 'bec626001@smtp-brevo.com'
-EMAIL_HOST_PASSWORD = 'qg5kEwaWcvxbMPHT'
 DEFAULT_FROM_EMAIL = 'joseph9267mwangi@gmail.com'
