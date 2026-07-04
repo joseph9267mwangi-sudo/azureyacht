@@ -1,7 +1,35 @@
 from django.shortcuts import render, redirect
 from .models import Booking
 from django.core.mail import send_mail
+import os 
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
+def send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message,):
+    configuration = sib_api_v3_sdk.configuration()
+    configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
+
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
+        sib_api_v3_sdk.ApiClient(configuration)
+    )
+
+    email_content = (
+        f"Name: {first_name} {last_name}\n"
+        f"Email: {email}\n"
+        f"Phone: {phone}\n"
+        f"Yacht:{yacht}\n"
+        f"Date: {date}\n"
+        f"Duration {duration}\n"
+        f"Message {message}"
+    )
+    send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+        to=[{"email": "joseph9267mwangi@gmail.com"}],
+        sender={"email": "joseph9267mwangi@gmail.com", "name": "AzureYacht"},
+        subject=f"New Booking from {first_name} {last_name}",
+        text_content=email_content
+    )
+    api_instance.send_transac_email(send_smtp_email)
+    
 def home(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name','')
