@@ -142,4 +142,4 @@ LOGGING = {
         'propagate' : False
     },
     },
-},
+}
