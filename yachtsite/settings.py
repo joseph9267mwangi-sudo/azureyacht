@@ -123,24 +123,22 @@ EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'joseph9267mwangi@gmail.com'
-LOGGING = {
+LOGGING = { 
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers':{
-        'console': {
+    'handlers': {
+        'console':
             'class': 'logging.StreamHandler',
-        },
     },
 },
 'root': {
     'handlers': ['console'],
-    'level' : 'WARNING',
+    'level': 'WARNING',
 },
 'loggers': {
-    'django' : {
-        'handlers' : ['console']
+    'django': {
+    'handlers': ['console'],
         'level': 'ERROR',
-        'propagate': False,
+        'propagate' : False
     }
-    }
-}
+    },
