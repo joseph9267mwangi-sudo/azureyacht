@@ -18,6 +18,7 @@ def send_booking_email(first_name, last_name, email, phone, yacht, guests, date,
         f"Email: {email}\n"
         f"Phone: {phone}\n"
         f"Yacht:{yacht}\n"
+        f"Guests: {guests}\n"
         f"Date: {date}\n"
         f"Duration {duration}\n"
         f"Message {message}"
