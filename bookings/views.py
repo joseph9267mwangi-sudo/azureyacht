@@ -23,7 +23,7 @@ def send_booking_email(first_name, last_name, email, phone, yacht, guests, date,
         f"Duration {duration}\n"
         f"Message {message}"
     )
-    def send_customer_confirmation_email(first_name, last_name, email, yacht, guests, date, duration, message):
+def send_customer_confirmation_email(first_name, last_name, email, yacht, guests, date, duration, message):
         configuration= sib_api_v3_sdk.Configuration()
         configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
 
