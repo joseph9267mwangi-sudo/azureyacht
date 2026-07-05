@@ -127,7 +127,7 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console':
+        'console': {
             'class': 'logging.StreamHandler',
     },
 },
@@ -140,5 +140,6 @@ LOGGING = {
     'handlers': ['console'],
         'level': 'ERROR',
         'propagate' : False
-    }
     },
+    },
+},
