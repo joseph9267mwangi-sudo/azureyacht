@@ -6,6 +6,7 @@ import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 
 def send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message,):
+    send_customer_confirmation_email(first_name, last_name, email, yacht, guests, date, duration, message)
     configuration = sib_api_v3_sdk.Configuration()
     configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
 
@@ -23,6 +24,31 @@ def send_booking_email(first_name, last_name, email, phone, yacht, guests, date,
         f"Duration {duration}\n"
         f"Message {message}"
     )
+    def send_customer_confirmation_email(first_name, email, yacht, guests, date, duration, message):
+        configuration= sib_api_v3_sdk.Configuration()
+        configuration.api_key['api-key'] = os.environ.get('BREVO_API_KEY')
+
+        api_insurance = sib_api_v3_sdk.TransactionalEmailsApi(
+            sib_api_v3_sdk.ApiClient(configuration)
+        )
+        configuration_content = (
+            f"hi {first_name}, \n\n"
+            f"Thankyou for booking with Azureyacht! Here are your booking details :\n\n"
+            f"yacht: {yacht}\n"
+            f"Guests: {guests}\n"
+            f"Duration: {duration}\n"
+            f"message: {message}\n\n"
+            f"we will be in touch shortly to confirm your booking.\n\n"
+            f"best regards, \nAzureyacht team" 
+        )
+        send_smtp_email= sib_api_v3_sdk.sendSmtpEmail(
+            to=[{"email":email}],
+            sender={"email": "joseph9267mwangi@gmail.com","name": "Azureyacht":}
+            subject="your Azureyacht Booking confirmation",
+            text_content=confirmation_content
+        )
+        api_instance.send_transac_email(send_smtp_email)
+
     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
         to=[{"email": "joseph9267mwangi@gmail.com"}],
         sender={"email": "joseph9267mwangi@gmail.com", "name": "AzureYacht"},
