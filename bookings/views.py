@@ -41,9 +41,9 @@ def send_booking_email(first_name, last_name, email, phone, yacht, guests, date,
             f"we will be in touch shortly to confirm your booking.\n\n"
             f"best regards, \nAzureyacht team" 
         )
-        send_smtp_email= sib_api_v3_sdk.sendSmtpEmail(
-            to=[{"email":email}],
-            sender={"email": "joseph9267mwangi@gmail.com","name": "Azureyacht":}
+        send_smtp_email= sib_api_v3_sdk.SendSmtpEmail(
+            to=[{"email": email}],
+            sender={"email": "joseph9267mwangi@gmail.com","name": "Azureyacht"},
             subject="your Azureyacht Booking confirmation",
             text_content=confirmation_content
         )
