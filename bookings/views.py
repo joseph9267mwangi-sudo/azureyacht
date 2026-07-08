@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import Booking
 from django.core.mail import send_mail
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from django.utils import timezone
+from datetime import datetime
 import os
 import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
+
 
 
 def send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message):
@@ -64,6 +69,45 @@ def home(request):
         date = request.POST.get('date', '')
         duration = request.POST.get('duration', '')
         message = request.POST.get('message', '')
+
+        errors = []
+        if not first_name:
+            errors.append("First name is required.")
+        if not last_name:
+            errors.append("Last name is required.")
+        if not email:
+            errors.append("Email is required.")
+        else:
+            try:
+                validate_email(email)
+            except ValidationError:
+                errors.append("Please enter a vailid email address.")
+        if not phone:
+            errors.append("Phone number is required")
+        if not yacht:
+            errors.append("Please select yacht.")
+        if not guests:
+            errors.append("number of guests is required")
+        else:
+            try:
+                guests_int = int(guests)
+                if guests_int <= 0:
+                    errors.append("number of guests must be at least one")
+            except ValueError : 
+                errors.append("number of guests must be a valid number")
+        if not date:
+            errors.append("Booking date is required")
+        else:
+            try:
+                 booking_date = datetime.strptime(date, '%Y-%m-%d').date()
+                 if booking_date < timezone.now().date():
+                      errors.append("Booking date cannot be in the past.")
+            except ValueError:
+                errors.append("please enter a valid date")
+        if errors:
+            return render(request, 'bookings/index.html', {'errors': errors})
+
+
 
         Booking.objects.create(
             first_name=first_name,
