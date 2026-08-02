@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete Payment</title>
+    <style>
+        body {
+            background: #0a1628;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h2 { color: #c9a84c; }
+        input {
+            padding: 10px;
+            margin: 15px 0;
+            width: 250px;
+        }
+        button {
+            padding: 14px 36px;
+            background: #c9a84c;
+            color: #0a1628;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Complete Your Payment</h2>
+        <p>Booking: {{ booking.first_name }} {{ booking.last_name }} — {{ booking.yacht }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label for="phone_number">M-Pesa Phone Number (2547XXXXXXXX):</label><br>
+                <input type="text" name="phone_number" id="phone_number" required>
+            </div>
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookings',
+        'payments',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,8 @@ LOGGING = {
     },
     },
 }
+# m-pesa configuration
+MPESA_CONSUMER_KEY = os.environ.get("MPESA_CONSUMER_KEY")
+MPESA_CONSUMER_SECRET = os.environ.get("MPESA_CONSUMER_SECRET")
+MPESA_SHORTCODE = os.environ.get ("MPESA_SHORTCODE")
+MPESA_PASSKEY = os.environ.get("MPESA_PASSKEY")

@@ -1,0 +1,7 @@
+{% extends "bookings/index.html" %}
+
+{% block content %}
+<h2>Payment Request Sent</h2>
+<p>Please check your phone and enter your M-Pesa PIN to complete the payment.</p>
+<p>Transaction reference: {{ transaction.checkout_request_id }}</p>
+{% endblock %}

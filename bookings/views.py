@@ -109,19 +109,20 @@ def home(request):
 
 
 
-        Booking.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            phone=phone,
-            yacht=yacht,
-            guests=guests,
-            date=date,
-            duration=duration,
-            message=message,
+        booking = Booking.objects.create(
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    phone=phone,
+                    yacht=yacht,
+                    guests=guests,
+                    date=date,
+                    duration=duration,
+                    message=message,
         )
+        
         send_booking_email(first_name, last_name, email, phone, yacht, guests, date, duration, message)
-        return render(request, 'bookings/success.html')
+        return render(request, 'bookings/success.html', {'booking': booking})
 
     return render(request, 'bookings/index.html')
 

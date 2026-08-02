@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Pending</title>
+    <style>
+        body {
+            background: #0a1628;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h2 { color: #c9a84c; }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Payment Request Sent</h2>
+        <p>Please check your phone and enter your M-Pesa PIN to complete the payment.</p>
+        <p>Transaction reference: {{ transaction.checkout_request_id }}</p>
+    </div>
+</body>
+</html>

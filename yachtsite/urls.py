@@ -9,6 +9,7 @@ urlpatterns = [
     # 1. update this line to point to your new form handler view
     path('',views.home, name='home'),
     path('success/', views.success,name='success'),
+    path('payments/', include('payments.urls')),
     #2. FORCE STATIC FILES TO SERVE EVEN WHEN THE DEBUG=FALSE
     re_path(r'^static/(?P<path>.*)',serve, {'document_root': settings.STATIC_ROOT}),
 ]
